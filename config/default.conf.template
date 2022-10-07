@@ -1,12 +1,12 @@
 server {
 	listen 80;
-	server_name "$domainName";
+	server_name pubking-production.up.railway.app;
 	return 301 https://"'$host'""'$request_uri'";
 }
 server {
 	listen 443 ssl http2;
 	listen [::]:443 ssl http2;
-	server_name "$domainName";
+	server_name pubking-production.up.railway.app;
 	ssl_certificate /usr/share/caddy/cert/cert.crt;
 	ssl_certificate_key /usr/share/caddy/cert/private.key;
 	ssl_ciphers EECDH+CHACHA20:EECDH+CHACHA20-draft:EECDH+ECDSA+AES128:EECDH+aRSA+AES128:RSA+AES128:EECDH+ECDSA+AES256:EECDH+aRSA+AES256:RSA+AES256:EECDH+ECDSA+3DES:EECDH+aRSA+3DES:RSA+3DES:!MD5;
