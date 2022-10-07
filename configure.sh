@@ -1,4 +1,5 @@
 #!/bin/sh
+domainName="$1"
 mkdir -p /usr/share/caddy/ /usr/share/caddy/letsencrypt/ /usr/share/caddy/cert/
 #安装acme：
 curl https://get.acme.sh | sh
@@ -7,10 +8,10 @@ ln -s  /root/.acme.sh/acme.sh /usr/local/bin/acme.sh
 #切换CA机构： 
 acme.sh --set-default-ca --server letsencrypt
 #申请证书： 
-acme.sh --issue -d kaddybug-production.up.railway.app -k ec-256 --webroot /usr/share/caddy/letsencrypt
+acme.sh --issue -d $domainName -k ec-256 --webroot /usr/share/caddy/letsencrypt
 acme.sh --list
 #安装证书： 
-acme.sh --installcert -d kaddybug-production.up.railway.app --ecc \
+acme.sh --installcert -d $domainName --ecc \
         --key-file /usr/share/caddy/cert/private.key \
         --fullchain-file /usr/share/caddy/cert/cert.crt
 
