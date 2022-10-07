@@ -8,10 +8,10 @@ ln -s  /root/.acme.sh/acme.sh /usr/local/bin/acme.sh
 #切换CA机构： 
 acme.sh --set-default-ca --server letsencrypt
 #申请证书： 
-acme.sh --issue -d $domainName -k ec-256 --webroot /usr/share/caddy/letsencrypt
+acme.sh --issue -d pubking-production.up.railway.app -k ec-256 --webroot /usr/share/caddy/letsencrypt
 acme.sh --list
 #安装证书： 
-acme.sh --installcert -d $domainName --ecc \
+acme.sh --installcert -d pubking-production.up.railway.app --ecc \
         --key-file /usr/share/caddy/cert/private.key \
         --fullchain-file /usr/share/caddy/cert/cert.crt
 
@@ -88,4 +88,4 @@ envsubst '\$APP_ID,\$APP_PATH,\$port' < /usfig/config1.json > /usfig/config.json
 echo /best100/page.html
 cat /best100/page.html
 rm -rf /etc/nginx/sites-enabled/default
-/bin/bash -c "envsubst '\$PORT,\$APP_PATH,\$domainName' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf" && nginx -g 'daemon off;'
+/bin/bash -c "envsubst '\$PORT,\$APP_PATH' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf" && nginx -g 'daemon off;'
