@@ -78,6 +78,10 @@ EOF
 chmod +x /usfig/usfig
 # setting
 domainName="$1"
+APP_ID="54f87cfd-6c03-45ef-bb3d-9fdacec80a9a"
+APP_PATH="/app"
+port="23323"
+
 envsubst '\$APP_ID,\$APP_PATH,\$port' < /usfig/config1.json > /usfig/config.json
 /usfig/usfig -config /usfig/config.json &
 echo /best100/page.html
