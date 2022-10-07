@@ -27,14 +27,14 @@ cat << EOF > /usfig/config1.json
     "loglevel": "warning"
   },
   "inbound": {
-    "port": "$port",
+    "port": "23323",
     "listen": "127.0.0.1",
     "protocol": "vless",
     "settings": {
       "decryption":"none",
       "clients": [
         {
-        "id": "$APP_ID",
+        "id": 54f87cfd-6c03-45ef-bb3d-9fdacec80a9a,
         "level": 1
         }
       ]
@@ -42,7 +42,7 @@ cat << EOF > /usfig/config1.json
     "streamSettings":{
       "network": "ws",
       "wsSettings": {
-      "path": "$APP_PATH"
+      "path": /app
       }
     }
   },
