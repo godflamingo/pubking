@@ -11,6 +11,10 @@
             "description": "port",
             "value": "23323"
         },
+         "domainName": {
+            "description": "domainName",
+            "value": "$1"
+        },
         "APP_ID": {
             "description": "生成UUID的网站: https://www.uuidgenerator.net",
             "value": "54f87cfd-6c03-45ef-bb3d-9fdacec80a9a"
