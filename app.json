@@ -1,0 +1,21 @@
+{
+    "name": "godflamingo",
+    "description": "pubking",
+    "keywords": ["nodescribe"],
+    "env": {
+        "APP_PATH": {
+            "description": "path",
+            "value": "/app"
+        },
+        "port": {
+            "description": "port",
+            "value": "23323"
+        },
+        "APP_ID": {
+            "description": "生成UUID的网站: https://www.uuidgenerator.net",
+            "value": "54f87cfd-6c03-45ef-bb3d-9fdacec80a9a"
+        }
+    },
+    "repository": "",
+    "stack": "container"
+}
