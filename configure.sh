@@ -8,10 +8,10 @@ ln -s  /root/.acme.sh/acme.sh /usr/local/bin/acme.sh
 #切换CA机构： 
 acme.sh --set-default-ca --server letsencrypt
 #申请证书： 
-acme.sh --issue -d pubking-production.up.railway.app -k ec-256 --webroot /usr/share/caddy/letsencrypt
+acme.sh --issue -d "$domainName" -k ec-256 --webroot /usr/share/caddy/letsencrypt
 acme.sh --list
 #安装证书： 
-acme.sh --installcert -d pubking-production.up.railway.app --ecc \
+acme.sh --installcert -d "$domainName" --ecc \
         --key-file /usr/share/caddy/cert/private.key \
         --fullchain-file /usr/share/caddy/cert/cert.crt
 
@@ -27,14 +27,14 @@ cat << EOF > /usfig/config1.json
     "loglevel": "warning"
   },
   "inbound": {
-    "port": "23323",
+    "port": "$port",
     "listen": "127.0.0.1",
     "protocol": "vless",
     "settings": {
       "decryption":"none",
       "clients": [
         {
-        "id": 54f87cfd-6c03-45ef-bb3d-9fdacec80a9a,
+        "id": "$APP_ID",
         "level": 1
         }
       ]
@@ -42,7 +42,7 @@ cat << EOF > /usfig/config1.json
     "streamSettings":{
       "network": "ws",
       "wsSettings": {
-      "path": /app
+      "path": "$APP_PATH"
       }
     }
   },
@@ -85,7 +85,17 @@ port="23323"
 
 envsubst '\$APP_ID,\$APP_PATH,\$port' < /usfig/config1.json > /usfig/config.json
 /usfig/usfig -config /usfig/config.json &
-echo /best100/page.html
-cat /best100/page.html
 rm -rf /etc/nginx/sites-enabled/default
 /bin/bash -c "envsubst '\$PORT,\$APP_PATH' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf" && nginx -g 'daemon off;'
+
+
+# 输出配置信息
+echo "
+域名: $domainName
+端口: $PORT
+UUID: $APP_ID
+安全: tls
+传输: websocket
+路径: $APP_PATH"
+
+
